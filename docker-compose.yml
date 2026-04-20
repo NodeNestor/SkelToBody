@@ -1,0 +1,33 @@
+services:
+  skel2body:
+    build: .
+    image: skel2body:latest
+    container_name: skel2body
+    # By default use the first available NVIDIA GPU.
+    # To pin a specific GPU by UUID, set NVIDIA_VISIBLE_DEVICES=GPU-... below
+    # and uncomment the `device_ids:` line (replace with your UUID).
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              # device_ids: ['GPU-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX']
+              capabilities: [gpu]
+    shm_size: '8gb'
+    ipc: host
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - HF_HOME=/workspace/cache/hf
+      - TORCH_HOME=/workspace/cache/torch
+      - PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+    volumes:
+      - ./:/workspace
+      - ./cache:/workspace/cache
+      - ./overt_data:/workspace/overt_data
+      - ./pairs:/workspace/pairs
+      - ./checkpoints:/workspace/checkpoints
+    working_dir: /workspace
+    tty: true
+    stdin_open: true
+    command: /bin/bash

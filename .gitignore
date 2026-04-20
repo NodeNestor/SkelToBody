@@ -1,0 +1,46 @@
+# External cloned dependency (users pull this themselves via setup.sh)
+TRELLIS.2/
+
+# Data (too big / personal)
+cache/
+overt_data/
+pairs/
+real_pairs/
+synth/
+inference_out/
+smal_weights/
+*.nii
+*.nii.gz
+*.tif
+*.tiff
+*.glb
+*.obj
+*.ply
+*.stl
+*.pkl
+*.pt
+*.safetensors
+*.npz
+
+# Training outputs
+checkpoints/
+results/
+runs/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
